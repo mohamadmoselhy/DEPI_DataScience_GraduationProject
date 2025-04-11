@@ -1,0 +1,112 @@
+Graduation_Project/
+│
+├── Milestone_1_Data_Collection_Exploration_Preprocessing/
+│   ├── 1_Data_Collection/
+│   │   ├── Raw_Data/
+│   │   │   ├── churn_data.csv
+│   │   │   └── ...
+│   │   ├── Data_Collection_Script.py
+│   │   └── Data_Collection_Description.md
+│   ├── 2_Data_Exploration/
+│   │   ├── Exploratory_Analysis_Script.py
+│   │   ├── Data_Statistics_Summary.csv
+│   │   ├── Missing_Values_Report.csv
+│   │   ├── Duplicate_Analysis_Report.csv
+│   │   ├── Outlier_Analysis_Report.csv
+│   │   └── Data_Structure_Overview.md
+│   ├── 3_Preprocessing_Feature_Engineering/
+│   │   ├── Preprocessing_Script.py
+│   │   ├── Feature_Engineering_Script.py
+│   │   ├── Missing_Values_Filled.csv
+│   │   ├── Outliers_Handled.csv
+│   │   ├── Categorical_Encoded.csv
+│   │   ├── Interaction_Features.csv
+│   │   └── Preprocessing_Report.md
+│   ├── 4_EDA_Report.md
+│   ├── 5_Interactive_Visualizations/
+│   │   ├── heatmap.png
+│   │   ├── pair_plot.png
+│   │   └── histogram.png
+│   └── 6_Cleaned_Dataset.csv
+│
+├── Milestone_2_Advanced_Data_Analysis_Feature_Engineering/
+│   ├── 1_Advanced_Data_Analysis/
+│   │   ├── Statistical_Tests_Script.py
+│   │   ├── Correlation_Matrix.csv
+│   │   ├── Recursive_Feature_Elimination_Report.md
+│   │   └── Advanced_Data_Analysis_Report.md
+│   ├── 2_Feature_Engineering/
+│   │   ├── New_Features.csv
+│   │   ├── Feature_Engineering_Script.py
+│   │   └── Feature_Engineering_Summary.md
+│   ├── 3_Data_Visualization/
+│   │   ├── Churned_vs_Not_Churned_Segmentation.png
+│   │   └── Feature_Importance_Dashboard/
+│   └── 4_Enhanced_Visualizations/
+│       ├── churn_trends_dashboard.html
+│       ├── feature_importance_dashboard.html
+│       └── ...
+│
+├── Milestone_3_Machine_Learning_Model_Development_Optimization/
+│   ├── 1_Model_Selection/
+│   │   ├── Model_Selection_Script.py
+│   │   └── Model_Selection_Notes.md
+│   ├── 2_Model_Training/
+│   │   ├── Train_Models_Script.py
+│   │   ├── Trained_Models/
+│   │   │   ├── logistic_regression_model.pkl
+│   │   │   ├── random_forest_model.pkl
+│   │   │   └── ...
+│   │   └── Train_Validation_Scripts.py
+│   ├── 3_Model_Evaluation/
+│   │   ├── Model_Evaluation_Script.py
+│   │   ├── Evaluation_Report.md
+│   │   ├── Confusion_Matrix.png
+│   │   ├── Accuracy_Recall_F1_Report.csv
+│   │   └── Model_Performance_Results.csv
+│   ├── 4_Hyperparameter_Tuning/
+│   │   ├── Hyperparameter_Tuning_Script.py
+│   │   ├── Grid_Search_Results.csv
+│   │   └── Hyperparameter_Tuning_Report.md
+│   ├── 5_Model_Comparison/
+│   │   ├── Model_Comparison_Script.py
+│   │   └── Model_Comparison_Report.md
+│   └── Final_Model/
+│       ├── Best_Model.pkl
+│       └── Final_Model_Code.py
+│
+├── Milestone_4_MLOps_Deployment_Monitoring/
+│   ├── 1_MLOps_Implementation/
+│   │   ├── MLflow_Tracking_Script.py
+│   │   ├── DVC_Configuration/
+│   │   │   └── dvc.yaml
+│   │   ├── Kubeflow_Pipeline_Description.md
+│   │   └── MLOps_Implementation_Script.py
+│   ├── 2_Model_Deployment/
+│   │   ├── Deploy_Model_Script.py
+│   │   ├── Dockerfile
+│   │   ├── Model_Deployment_API/
+│   │   │   ├── app.py
+│   │   │   └── requirements.txt
+│   │   ├── Cloud_Deployment_Notes.md
+│   │   └── Deployment_Success_Logs/
+│   ├── 3_Model_Monitoring/
+│   │   ├── Model_Monitoring_Script.py
+│   │   ├── Monitoring_Logs/
+│   │   └── Monitoring_Alerts_Setup.md
+│   └── 4_Model_Retraining/
+│       ├── Retraining_Strategy.md
+│       ├── Retraining_Script.py
+│       └── Model_Retraining_Schedule.md
+│
+├── Milestone_5_Final_Documentation_Presentation/
+│   ├── Final_Report/
+│   │   ├── Final_Project_Report.md
+│   │   └── Business_Impact_Analysis.md
+│   ├── Final_Presentation/
+│   │   ├── Final_Presentation.pptx
+│   │   └── Presentation_Speaker_Notes.md
+│   └── Future_Improvements/
+│       └── Future_Improvements_Recommendations.md
+│
+└── README.md
