@@ -1,0 +1,65 @@
+===========================================================================
+📌 Missing Data Info (count and percentage):
+                      Missing Count  Missing Percentage
+creditscore                       0                 0.0
+gender                            0                 0.0
+age                               0                 0.0
+tenure                            0                 0.0
+balance                           0                 0.0
+numofproducts                     0                 0.0
+hascrcard                         0                 0.0
+isactivemember                    0                 0.0
+estimatedsalary                   0                 0.0
+exited                            0                 0.0
+geography_france                  0                 0.0
+geography_germany                 0                 0.0
+geography_spain                   0                 0.0
+creditscorerange                  0                 0.0
+balancerange                      0                 0.0
+estimatedsalaryrange              0                 0.0
+tenurerange                       0                 0.0
+===========================================================================
+
+📌 Duplicate Row Info (count and percentage):
+   Duplicate Count  Duplicate Percentage
+0                0                   0.0
+===========================================================================
+
+📌 Shape of DataFrame:
+(9996, 17)
+===========================================================================
+
+📌 Unique Values Info (count and percentage):
+                      Unique Count  Unique Percentage
+gender                           2           0.020008
+isactivemember                   2           0.020008
+hascrcard                        2           0.020008
+exited                           2           0.020008
+geography_spain                  2           0.020008
+geography_germany                2           0.020008
+geography_france                 2           0.020008
+estimatedsalaryrange             3           0.030012
+balancerange                     3           0.030012
+numofproducts                    4           0.040016
+tenurerange                      4           0.040016
+creditscorerange                 5           0.050020
+tenure                          11           0.110044
+age                             73           0.730292
+creditscore                    460           4.601841
+balance                       6379          63.815526
+estimatedsalary               9995          99.989996
+===========================================================================
+
+📌 Descriptive Statistics (for numerical columns):
+       creditscore       gender          age       tenure        balance  numofproducts  ...  estimatedsalary       exited  creditscorerange  balancerange  estimatedsalaryrange  tenurerange
+count  9996.000000  9996.000000  9996.000000  9996.000000    9996.000000    9996.000000  ...      9996.000000  9996.000000       9996.000000   9996.000000           9996.000000  9996.000000
+mean    650.503301     0.545618     3.654680     5.013305   76476.263216       1.530212  ...    100106.701248     0.203782          1.447479      0.953281              1.457683     1.857443
+std      96.624668     0.497940     0.251657     2.892353   62397.118820       0.581684  ...     57513.314398     0.402829          1.164741      0.824899              0.799518     1.057140
+min     350.000000     0.000000     2.944439     0.000000       0.000000       1.000000  ...        11.580000     0.000000          0.000000      0.000000              0.000000     0.000000
+25%     584.000000     0.000000     3.496508     3.000000       0.000000       1.000000  ...     51002.110000     0.000000          1.000000      0.000000              1.000000     1.000000
+50%     652.000000     1.000000     3.637586     5.000000   97173.290000       1.000000  ...    100238.110000     0.000000          1.000000      1.000000              2.000000     2.000000
+75%     717.250000     1.000000     3.806662     7.250000  127639.372500       2.000000  ...    149400.107500     0.000000          2.000000      2.000000              2.000000     3.000000
+max     850.000000     1.000000     4.532599    10.000000  250898.090000       4.000000  ...    199992.480000     1.000000          4.000000      2.000000              2.000000     3.000000
+
+[8 rows x 14 columns]
+===========================================================================

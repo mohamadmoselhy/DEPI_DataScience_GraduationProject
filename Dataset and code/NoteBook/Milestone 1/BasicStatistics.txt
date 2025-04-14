@@ -1,0 +1,83 @@
+===========================================================================
+📌 Missing Data Info (count and percentage):
+                      Missing Count  Missing Percentage
+creditscore                       0                 0.0
+gender                            0                 0.0
+age                               0                 0.0
+tenure                            0                 0.0
+balance                           0                 0.0
+numofproducts                     0                 0.0
+hascrcard                         0                 0.0
+isactivemember                    0                 0.0
+estimatedsalary                   0                 0.0
+exited                            0                 0.0
+geography_france                  0                 0.0
+geography_germany                 0                 0.0
+geography_spain                   0                 0.0
+creditscorerange                  0                 0.0
+balancerange                      0                 0.0
+estimatedsalaryrange              0                 0.0
+tenurerange                       0                 0.0
+===========================================================================
+
+📌 Duplicate Row Info (count and percentage):
+   Duplicate Count  Duplicate Percentage
+0                0                   0.0
+===========================================================================
+
+📌 Shape of DataFrame:
+(9996, 17)
+===========================================================================
+
+📌 Unique Values Info (count and percentage):
+                      Unique Count  Unique Percentage
+gender                           2           0.020008
+isactivemember                   2           0.020008
+hascrcard                        2           0.020008
+exited                           2           0.020008
+geography_spain                  2           0.020008
+geography_germany                2           0.020008
+geography_france                 2           0.020008
+estimatedsalaryrange             3           0.030012
+balancerange                     3           0.030012
+numofproducts                    4           0.040016
+tenurerange                      4           0.040016
+creditscorerange                 5           0.050020
+tenure                          11           0.110044
+age                             73           0.730292
+creditscore                    460           4.601841
+balance                       6379          63.815526
+estimatedsalary               9995          99.989996
+===========================================================================
+
+📌 Descriptive Statistics (for numerical columns):
+       creditscore       gender          age       tenure        balance  \
+count  9996.000000  9996.000000  9996.000000  9996.000000    9996.000000   
+mean    650.503301     0.545618     1.536416     5.013305   76476.263216   
+std      96.624668     0.497940     0.053974     2.892353   62397.118820   
+min     350.000000     0.000000     1.372307     0.000000       0.000000   
+25%     584.000000     0.000000     1.503301     3.000000       0.000000   
+50%     652.000000     1.000000     1.534194     5.000000   97173.290000   
+75%     717.250000     1.000000     1.570003     7.250000  127639.372500   
+max     850.000000     1.000000     1.710658    10.000000  250898.090000   
+
+       numofproducts    hascrcard  isactivemember  estimatedsalary  \
+count    9996.000000  9996.000000     9996.000000      9996.000000   
+mean        1.530212     0.705482        0.514906    100106.701248   
+std         0.581684     0.455849        0.499803     57513.314398   
+min         1.000000     0.000000        0.000000        11.580000   
+25%         1.000000     0.000000        0.000000     51002.110000   
+50%         1.000000     1.000000        1.000000    100238.110000   
+75%         2.000000     1.000000        1.000000    149400.107500   
+max         4.000000     1.000000        1.000000    199992.480000   
+
+            exited  
+count  9996.000000  
+mean      0.203782  
+std       0.402829  
+min       0.000000  
+25%       0.000000  
+50%       0.000000  
+75%       0.000000  
+max       1.000000  
+===========================================================================
