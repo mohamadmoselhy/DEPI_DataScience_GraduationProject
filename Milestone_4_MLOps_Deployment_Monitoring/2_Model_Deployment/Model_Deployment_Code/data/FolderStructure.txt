@@ -1,0 +1,29 @@
+my_project/
+│
+├── app/                      # Core application code
+│   ├── __init__.py
+│   ├── main.py               # Entry point (e.g., for FastAPI, Flask, Streamlit, etc.)
+│   ├── routes/               # API routes or views
+│   │   └── __init__.py
+│   ├── services/             # Business logic
+│   │   └── __init__.py
+│   ├── models/               # Data models (e.g., Pydantic, ORM)
+│   │   └── __init__.py
+│   └── utils/                # Utility functions
+│       └── __init__.py
+│
+├── config/                   # Configuration files (e.g., config.yaml, secrets.json)
+│   └── settings.py
+│
+├── data/                     # Data files (input/output)
+│   └── sample.csv
+│
+├── tests/                    # Unit and integration tests
+│   └── test_main.py
+│
+├── Dockerfile                # For containerization
+├── requirements.txt          # Dependencies
+├── .env                      # Environment variables (never commit to public repo)
+├── README.md                 # Project overview
+├── setup.py                  # (Optional) For packaging
+└── run.sh  
