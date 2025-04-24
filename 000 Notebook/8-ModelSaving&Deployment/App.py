@@ -1,88 +1,200 @@
+# 000 Notebook/8-ModelSaving&Deployment/App.py
 import streamlit as st
+import pandas as pd
+import numpy as np
+import time # For spinner
+import traceback # For detailed error reporting
+
+# Import from our streamlit_app package
+# Ensure this runs correctly based on how streamlit executes the script
+# If imports fail, Python path issues might need addressing (e.g., running from workspace root)
+try:
+    from streamlit_app.config import FEATURE_NAMES, MODEL_PATH
+    from streamlit_app.labels import LABELS
+    from streamlit_app.state import initialize_state
+    from streamlit_app.models import load_model_and_explainer
+    from streamlit_app.ui import (
+        select_language,
+        # apply_rtl_styling, # Removed as CSS is global now
+        display_main_title,
+        build_sidebar,
+        display_prediction_results,
+        display_shap_plot,
+    )
+except ImportError as e:
+     st.error(f"Import Error: {e}. Please ensure the script is run from the workspace root directory ('GraduationProject/') and the 'streamlit_app' directory exists with an '__init__.py' file.")
+     st.stop()
+
+
+# --- Page Config (First Streamlit command) ---
+st.set_page_config(
+    page_title="Churn Prediction App", # Use a static title
+    page_icon="🏦",
+    layout="wide"
+)
+
+# --- Global CSS Styling ---
+st.markdown("""
+<style>
+    /* Main title box */
+    .title-box {
+        text-align: center; font-size: 28px; font-weight: bold; color: white;
+        background-color: #4682B4; padding: 15px; border-radius: 10px;
+        margin-top: 10px; margin-bottom: 30px;
+    }
+    /* Sidebar header */
+    [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2 {
+        font-size: 22px; color: #333;
+    }
+    /* Make sidebar slightly lighter */
+    [data-testid="stSidebar"] {
+        background-color: #f8f9fa; border-right: 1px solid #e0e0e0;
+    }
+    /* RTL specific styles */
+    .rtl body { direction: rtl; text-align: right; }
+    .rtl [data-testid="stSidebar"] *,
+    .rtl .stButton > button,
+    .rtl .stSelectbox > div > div,
+    .rtl .stNumberInput > div > div,
+    .rtl label {
+        direction: rtl !important;
+        text-align: right !important;
+    }
+    .rtl label { display: block; width: 100%; } /* Ensure labels align */
+    /* Ensure plots/dataframes align correctly in RTL - often LTR */
+    .rtl .stPlotlyChart, .rtl .stImage, .rtl .stDataFrame {
+        direction: ltr !important;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 
 def run_app():
-    # Label translations
-    labels = {
-        'en': {
-            "title": "Customer Data",
-            'Age': 'Age',
-            'Balance': 'Balance',
-            'Credit Score': 'Credit Score',
-            'Gender': 'Gender',
-            'Active Member': 'Active Member',
-            'Geography': 'Geography',
-            'Tenure (Years)': 'Tenure (Years)',
-            'Number of Products': 'Number of Products',
-            'Credit Card Ownership': 'Credit Card Ownership',
-            'Submit': 'Submit',
-            'Collected Data': 'Collected Data',
-            'Form submitted successfully!': 'Form submitted successfully!'
-        },
-        'ar': {
-            "title": " بيانات العميل",
-            'Age': 'العمر',
-            'Balance': 'الرصيد',
-            'Credit Score': 'درجة الائتمان',
-            'Gender': 'الجنس',
-            'Active Member': 'عضو نشط',
-            'Geography': 'المنطقة',
-            'Tenure (Years)': 'مدة الاشتراك (بالسنوات)',
-            'Number of Products': 'عدد المنتجات',
-            'Credit Card Ownership': 'امتلاك بطاقة ائتمان',
-            'Submit': 'إرسال',
-            'Collected Data': 'البيانات المجمعة',
-            'Form submitted successfully!': 'تم إرسال النموذج بنجاح!'
-        }
-    }
+    """Runs the main application flow."""
 
-    # Language selection
-    language = st.selectbox('Select Language / اختر اللغة', ['English', 'Arabic'])
-    lang_code = 'ar' if language == 'Arabic' else 'en'
+    initialize_state() # Initialize session state first
 
-    # Inject basic RTL support for Arabic
-    if lang_code == 'ar':
-        rtl_css = """<style>body { direction: rtl; text-align: right; }</style>"""
-        st.markdown(rtl_css, unsafe_allow_html=True)
+    lang_code = select_language() # Get language from sidebar
 
-    # Title
-    st.markdown(f"### **{labels[lang_code]['title']}**")
+    # Load model and explainer (cached)
+    model, explainer = load_model_and_explainer()
+    if model is None:
+        # Error message is handled within load_model_and_explainer
+        st.stop() # Stop execution if model loading failed
 
-    # Form layout in 3 columns
-    col1, col2, col3 = st.columns(3)
+    # Apply RTL class conditionally (must happen before content)
+    # This adds a CSS class to a wrapper div for RTL styling
+    rtl_div_open = '<div class="rtl">' if lang_code == 'ar' else ''
+    rtl_div_close = '</div>' if lang_code == 'ar' else ''
+    st.markdown(rtl_div_open, unsafe_allow_html=True)
 
-    with col1:
-        age = st.number_input(labels[lang_code]['Age'], min_value=18, max_value=120)
-        balance = st.number_input(labels[lang_code]['Balance'], min_value=0)
-        credit_score = st.number_input(labels[lang_code]['Credit Score'], min_value=300, max_value=850)
+    # --- Main Page Content ---
+    display_main_title(lang_code)
 
-    with col2:
-        gender = st.selectbox(labels[lang_code]['Gender'], ['Male', 'Female'])
-        active_member = st.selectbox(labels[lang_code]['Active Member'], ['Yes', 'No'])
-        geography = st.selectbox(labels[lang_code]['Geography'], ['Frence', 'Germany', 'Spain'])
+    submit_button_pressed = build_sidebar(lang_code)
 
-    with col3:
-        tenure = st.number_input(labels[lang_code]['Tenure (Years)'], min_value=0, max_value=100)
-        products = st.number_input(labels[lang_code]['Number of Products'], min_value=1)
-        credit_card = st.selectbox(labels[lang_code]['Credit Card Ownership'], ['Yes', 'No'])
+    # --- Prediction Logic ---
+    if submit_button_pressed:
+        # Get current values from session state
+        try:
+            current_age = st.session_state.age
+            current_gender = st.session_state.gender
+            current_geography = st.session_state.geography
+            current_credit_score = st.session_state.credit_score
+            current_balance = st.session_state.balance
+            current_num_products = st.session_state.num_products
+            current_is_active_member = st.session_state.is_active_member
+        except KeyError as e:
+             st.error(f"Session state error: Missing key {e}. Please refresh the page.")
+             st.stop()
 
-    # Submit button
-    if st.button(labels[lang_code]['Submit']):
-        data = {
-            labels[lang_code]['Age']: age,
-            labels[lang_code]['Balance']: balance,
-            labels[lang_code]['Credit Score']: credit_score,
-            labels[lang_code]['Gender']: gender,
-            labels[lang_code]['Active Member']: active_member,
-            labels[lang_code]['Geography']: geography,
-            labels[lang_code]['Tenure (Years)']: tenure,
-            labels[lang_code]['Number of Products']: products,
-            labels[lang_code]['Credit Card Ownership']: credit_card
-        }
+        with st.spinner(LABELS[lang_code]['Predicting']):
+            time.sleep(0.2) # Keep short simulation
 
-        st.subheader(labels[lang_code]['Collected Data'])
-        st.json(data)
-        st.success(labels[lang_code]['Form submitted successfully!'])
+            st.divider()
+            st.header(LABELS[lang_code]['Prediction'])
 
-# Run the app
+            # --- Feature Preparation ---
+            try:
+                gender_label = 1 if current_gender == 'Male' else 0
+                geo_fr = 1 if current_geography == 'France' else 0
+                geo_de = 1 if current_geography == 'Germany' else 0
+                geo_es = 1 if current_geography == 'Spain' else 0 # Base case if not FR/DE
+
+                # Ensure age is numeric for sqrt
+                age_num = pd.to_numeric(current_age, errors='coerce')
+                if pd.isna(age_num):
+                    st.error(f"Invalid Age input: '{current_age}'. Please enter a number.")
+                    st.stop()
+                age_skewed = np.sqrt(age_num)
+
+                # Prepare features list - ensure order matches FEATURE_NAMES
+                features = [
+                    current_credit_score, current_num_products, current_balance, gender_label, age_skewed,
+                    current_is_active_member, geo_fr, geo_de, geo_es
+                ]
+                input_df = pd.DataFrame([features], columns=FEATURE_NAMES)
+                # Ensure dtypes are numeric (float) before prediction
+                input_df = input_df.astype(float)
+
+            except Exception as e:
+                 st.error(f"Error preparing features: {e}")
+                 st.error(traceback.format_exc())
+                 st.stop()
+
+
+            # --- Prediction and SHAP Calculation ---
+            try:
+                prediction = None
+                probability = None
+                shap_values_calculated = None
+
+                # Predict probability if possible
+                if hasattr(model, 'predict_proba'):
+                    probs = model.predict_proba(input_df)[0]
+                    if len(probs) > 1 : # Check if multi-class probabilities returned
+                        prediction = np.argmax(probs) # Class with highest probability
+                        probability = probs[1] # Probability of class 1 (assuming churn)
+                    else: # Handle binary model returning only prob of class 1
+                         probability = probs[0]
+                         prediction = 1 if probability >= 0.5 else 0 # Thresholding
+                         st.info("Model provided single probability; assuming binary classification.")
+
+                else: # Fallback to predict
+                    st.info(LABELS[lang_code]['Proba Error'])
+                    prediction = model.predict(input_df)[0]
+                    probability = None # Cannot determine probability
+
+                # Calculate SHAP values if possible
+                if explainer is not None:
+                    try:
+                        # SHAP calculation can fail if input data has unexpected format/values
+                        shap_values_calculated = explainer(input_df)
+                    except Exception as e:
+                         st.warning(f"{LABELS[lang_code]['SHAP Error']} (Calculation): {e}")
+                         # Optionally log traceback.format_exc() for debugging
+
+                # --- Display Results ---
+                if prediction is not None:
+                    display_prediction_results(lang_code, prediction, probability)
+                    st.divider()
+                    # Display SHAP plot using the calculated values
+                    display_shap_plot(lang_code, explainer, shap_values_calculated, input_df)
+                else:
+                     st.error("Prediction could not be made (Result was None).")
+
+
+            except Exception as e:
+                st.error(f"{LABELS[lang_code]['Prediction Error']}: {e}")
+                st.error(traceback.format_exc()) # Show detailed traceback for debugging
+
+
+    # Close the RTL div if it was opened
+    st.markdown(rtl_div_close, unsafe_allow_html=True)
+
+
 if __name__ == "__main__":
+    # Check if SHAP is needed and not available - optional warning here
+    # if not config.SHAP_AVAILABLE:
+    #    st.sidebar.warning("SHAP library not installed. Explanations unavailable.")
     run_app()
