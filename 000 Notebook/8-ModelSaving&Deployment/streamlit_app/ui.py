@@ -1,18 +1,35 @@
 # streamlit_app/ui.py
 import streamlit as st
 import pandas as pd
-import numpy as np # Need numpy here
+import numpy as np
 from typing import Dict, Any, Optional
 
 # Import constants and utils from other modules within the package
 from .labels import LABELS
 from .config import FEATURE_NAMES, SHAP_AVAILABLE
+from .styles import apply_custom_styles
 
 # Conditionally import SHAP for plotting types
 if SHAP_AVAILABLE:
     import shap
     import matplotlib.pyplot as plt
 
+def setup_page():
+    """Apply custom styles to the page."""
+    st.markdown(apply_custom_styles(), unsafe_allow_html=True)
+    st.markdown("""
+        <style>
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+        section[data-testid="stSidebar"] {display: none;}
+        div[data-testid="stToolbar"] {display: none;}
+        div[data-testid="stDecoration"] {display: none;}
+        div[data-testid="stStatusWidget"] {display: none;}
+        div.block-container {padding: 0 !important;}
+        div[data-testid="stVerticalBlock"] > div {padding-top: 0 !important;}
+        </style>
+    """, unsafe_allow_html=True)
+    
 
 def select_language() -> str:
     """Creates language selector and returns the selected language code ('en' or 'ar')."""
@@ -85,7 +102,6 @@ def build_sidebar(lang_code: str) -> bool:
         submit_button_pressed = st.form_submit_button(label=LABELS[lang_code]['Submit'])
 
     return submit_button_pressed
-
 
 def display_prediction_results(lang_code: str, prediction: int, probability: Optional[float]):
     """Displays the prediction outcome (churn/stay) and recommendation."""

@@ -1,14 +1,30 @@
 # streamlit_app/config.py
 import streamlit as st
 import os
+from pathlib import Path
 
 # --- Configuration ---
-MODEL_PATH = os.path.join('streamlit_app', 'Model', 'model.joblib')  # Path relative to workspace root
+# Get the directory containing this file
+CURRENT_DIR = Path(__file__).parent
 
-FEATURE_NAMES: list[str] = [
-    'creditscore', 'numofproducts', 'balance', 'genderlabel', 'ageskewed',
-    'isactivemember', 'geographyfrance', 'geographygermany', 'geographyspain'
+# Model and scaler paths (relative to this file)
+MODEL_PATH = CURRENT_DIR / "Model" / "model.joblib"
+SCALER_PATH = CURRENT_DIR / "Model" / "scaler.joblib"
+
+FEATURE_NAMES = [
+    'creditscore',
+    'numofproducts',
+    'balance',
+    'genderlabel',
+    'ageskewed',  # Using transformed age
+    'isactivemember',
+    'geographyfrance',
+    'geographygermany',
+    'geographyspain'
 ]
+
+# Features that need scaling
+FEATURES_TO_SCALE = FEATURE_NAMES  # All features should be scaled
 
 # Attempt to import SHAP and check availability
 try:
