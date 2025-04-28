@@ -1,0 +1,36 @@
+===========================================================================
+ Dataset Shape: (9996, 20)
+ Duplicate Rows: 0 (0.00%)
+===========================================================================
+ No missing values.
+===========================================================================
+ No constant columns.
+===========================================================================
+ Encode Categorical Columns:
+ - geography
+ - gender
+ - creditscorerange
+ - balancerange
+ - estimatedsalaryrange
+ - tenurerange
+===========================================================================
+ No mixed-type columns.
+===========================================================================
+ High Cardinality Columns:
+ - creditscore: 460 unique values
+ - age: 73 unique values
+ - balance: 6379 unique values
+ - estimatedsalary: 9995 unique values
+ - ageskewed: 73 unique values
+===========================================================================
+ Skewed Numeric Columns:
+ - exited: Skewness = 1.47
+ - geographyspain: Skewness = 1.17
+ - geographygermany: Skewness = 1.15
+ - age: Skewness = 1.01
+===========================================================================
+ Suggested Next Steps:
+ - Encode categorical features.
+ - Consider binning/embedding for high cardinality.
+ - Apply transformations to skewed features.
+===========================================================================
