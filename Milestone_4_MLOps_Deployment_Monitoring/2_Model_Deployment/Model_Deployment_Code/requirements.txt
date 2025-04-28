@@ -1,3 +1,10 @@
-# Example requirements
-pydantic
-python-dotenv
+streamlit
+scikit-learn
+imbalanced-learn
+xgboost
+joblib
+pandas
+numpy
+seaborn
+matplotlib
+mylibirary @ file://./mylibirary-0.0.1-py3-none-any.whl
