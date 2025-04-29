@@ -15,9 +15,6 @@
  - geography
  - gender
 ===========================================================================
- Mixed Type Columns:
- - geography
-===========================================================================
  High Cardinality Columns:
  - rownumber: 10000 unique values
  - customerid: 10000 unique values
