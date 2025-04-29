@@ -64,7 +64,7 @@ Each model is assessed using:
 
 ## 🏆 Best Model
 
-After comparing all models based on the above metrics, the notebook highlights the most effective model for predicting churn.
+After comparing all models based on the above metrics, the notebook highlights the most effective model for predicting churn. XGboost.
 
 ## 📬 Contact
 
