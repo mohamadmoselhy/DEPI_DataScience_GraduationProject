@@ -1,7 +1,7 @@
 
 
 
-# 📉 Customer Churn Prediction
+# 📉 Bank Customer Churn Prediction
 
 This project is focused on predicting customer churn using various machine-learning classification algorithms. By identifying customers who are likely to leave a service, businesses can take proactive steps to improve retention.
 
@@ -73,4 +73,9 @@ Mohamed Ibrahim Moselhy
 Senior RPA Developer & Data Science Enthusiast  
 📧 Mohamed_Moselhy@outlook.com  
 🔗 [LinkedIn](https://www.linkedin.com/in/mohamed-ibrahim96/) | [GitHub](https://github.com/mohamadmoselhy)
+
+Hassan Salem Waked Hassan
+Mohamed fekry
+Mohamed elaseuty
+Mustafa mohamed
 
